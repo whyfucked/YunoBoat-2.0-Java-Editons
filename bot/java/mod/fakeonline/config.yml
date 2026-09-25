@@ -1,0 +1,10 @@
+tab:
+  prefix: "&7[&aOnline&7] &f"
+fake:
+  # number of fake players to keep standing at the anchor
+  count: 0
+anchor:
+  world: world
+  x: 0
+  y: 0
+  z: 0

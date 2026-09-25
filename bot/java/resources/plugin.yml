@@ -1,0 +1,7 @@
+name: PerformanceBoost
+version: 2.0
+main: com.performance.boost.PerformanceBoost
+api-version: "1.13"
+description: Lightweight chunk preloader and latency telemetry for improved server performance.
+author: MVC
+load: STARTUP

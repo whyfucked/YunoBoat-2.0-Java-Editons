@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "performanceboost",
+  "version": "2.0.0",
+  "name": "PerformanceBoost",
+  "description": "Chunk preloader and latency telemetry.",
+  "authors": ["MVC"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.performance.boost.fabric.PerfBoostMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0"
+  }
+}

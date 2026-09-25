@@ -1,0 +1,33 @@
+// neoforge mod — one jar covers NeoForge 21.1.x, 26.1.2 and 26.2: @Mod keeps
+// the same package (net.neoforged.fml.common) across the FML 4.x and 11.x
+// lines (verified in loader-4.0.44 and loader-11.0.16), the mod classes are
+// compiled at target 8 and the neoforge.mods.toml loaderVersion [3,) matches
+// javafml on both lines. Compiled against the 4.0.44 loader (v65 class files,
+// readable by javac 21 — the /opt/jdk21 fallback in build.sh covers it).
+plugins { id 'java' }
+
+sourceSets.main.java { srcDirs = ['src'] }
+sourceSets.main.resources {
+    srcDirs = ['.']
+    exclude 'src/**'
+    exclude 'build/**'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories { maven { url = 'https://maven.neoforged.net/releases' } }
+
+dependencies {
+    compileOnly project(':core')
+    compileOnly('net.neoforged.fancymodloader:loader:4.0.44') { transitive = false }
+}
+
+tasks.withType(JavaCompile) { options.compilerArgs << '-Xlint:-options' }
+
+jar {
+    archiveFileName = 'perfboost_neoforge.jar'
+    from(project(':core').sourceSets.main.output)
+}

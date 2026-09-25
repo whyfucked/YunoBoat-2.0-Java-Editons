@@ -1,0 +1,2 @@
+rootProject.name = 'perfboost'
+include 'core', 'plugin', 'mod:fabric', 'mod:forge', 'mod:neoforge'

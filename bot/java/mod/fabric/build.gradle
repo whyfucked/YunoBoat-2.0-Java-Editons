@@ -1,0 +1,29 @@
+// fabric mod — thin entrypoint over the core engine. One jar covers every
+// MC version (fabric loader >= 0.14 discovers it the same way everywhere).
+plugins { id 'java' }
+
+sourceSets.main.java { srcDirs = ['src'] }
+sourceSets.main.resources {
+    srcDirs = ['.']
+    exclude 'src/**'
+    exclude 'build/**'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories { maven { url = 'https://maven.fabricmc.net' } }
+
+dependencies {
+    compileOnly project(':core')
+    compileOnly('net.fabricmc:fabric-loader:0.14.21') { transitive = false }
+}
+
+tasks.withType(JavaCompile) { options.compilerArgs << '-Xlint:-options' }
+
+jar {
+    archiveFileName = 'perfboost_fabric.jar'
+    from(project(':core').sourceSets.main.output)
+}

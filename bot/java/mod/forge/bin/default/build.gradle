@@ -1,0 +1,28 @@
+// forge mod — one jar covers forge 1.16.5 AND 1.20.x: @Mod keeps the same
+// package (net.minecraftforge.fml.common) across both, the mod classes are
+// compiled at target 8 (load on Java 8+) and the mods.toml loaderVersion
+// [24,) matches javafml on both lines (1.16.5 = 24, 1.20.x = 47).
+// Compiled against the 1.16.5 universal (Java-8 class files, has @Mod).
+plugins { id 'java' }
+
+sourceSets.main.java { srcDirs = ['src'] }
+sourceSets.main.resources { srcDirs = ['src/main/resources'] }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories { maven { url = 'https://maven.minecraftforge.net' } }
+
+dependencies {
+    compileOnly project(':core')
+    compileOnly('net.minecraftforge:forge:1.16.5-36.2.39:universal') { transitive = false }
+}
+
+tasks.withType(JavaCompile) { options.compilerArgs << '-Xlint:-options' }
+
+jar {
+    archiveFileName = 'perfboost_forge.jar'
+    from(project(':core').sourceSets.main.output)
+}

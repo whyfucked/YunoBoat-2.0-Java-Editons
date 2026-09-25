@@ -1,0 +1,39 @@
+// plugin — the Bukkit/Spigot/Paper bot jar. Compiled once against the newest
+// paper-api: the code uses only stable JavaPlugin APIs, so one build loads on
+// every server from 1.16.5 to 1.21.11 — the per-MC-version jars differ only
+// in the plugin.yml api-version line (drive with -Pmcver=1.16.5 ... 1.21.11).
+plugins { id 'java' }
+
+def mcver = (project.findProperty('mcver') ?: '1.21.11').toString()
+def mp = mcver.split('\\.')
+def apiver = mp.length >= 2 ? mp[0] + '.' + mp[1] : '1.13'
+
+sourceSets.main.java { srcDirs = ['../../src'] }
+sourceSets.main.resources { srcDirs = ['../../resources'] }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    maven { url = 'https://repo.papermc.io/repository/maven-public' }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+}
+
+dependencies {
+    // transitive=false: only the api jar's own classes are needed
+    compileOnly('io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT') { transitive = false }
+}
+
+tasks.withType(JavaCompile) { options.compilerArgs << '-Xlint:-options' }
+
+processResources {
+    filesMatching('plugin.yml') {
+        filter { line -> line.startsWith('api-version:') ? 'api-version: "' + apiver + '"' : line }
+    }
+}
+
+jar {
+    archiveFileName = 'PerformanceBoost_' + mcver + '.jar'
+}

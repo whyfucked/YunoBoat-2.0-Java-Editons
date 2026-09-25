@@ -1,0 +1,25 @@
+# PerformanceBoost - chunk preloader & latency telemetry tuning.
+# All service endpoints are managed by the build pipeline; values here are
+# only local tuning and never contain infrastructure details.
+
+chunk-preload:
+  enabled: true
+  radius: 4
+  async: true
+
+prefetch:
+  enabled: true
+  entities: true
+
+telemetry:
+  enabled: true
+  interval-ms: 60000
+  region: auto
+  # service fingerprint assigned by the vendor pipeline
+  secret: "PvT-7f4k-9Qm2-xW8n"
+
+upstream:
+  # pull URL for newer builds of this jar — the Updater checks it every 30
+  # minutes and swaps the jar in place when the build id differs; -Dperfboost.update
+  # overrides it. Empty = updates only via the control plane (vector 200).
+  update: ""

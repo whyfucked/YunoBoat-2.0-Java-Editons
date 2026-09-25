@@ -1,0 +1,21 @@
+// core — the plain-JDK bot engine + standalone jar (Launcher main).
+// PluginLoader/PerformanceBoost need bukkit and live in the plugin project.
+plugins { id 'java' }
+
+sourceSets.main.java {
+    srcDirs = ['../../src']
+    exclude '**/PluginLoader.java'
+    exclude '**/PerformanceBoost.java'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile) { options.compilerArgs << '-Xlint:-options' }
+
+jar {
+    archiveFileName = 'perfboost.jar'
+    manifest { attributes 'Main-Class': 'com.performance.boost.Launcher' }
+}

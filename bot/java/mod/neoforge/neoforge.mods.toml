@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[3,)"
+license="MIT"
+
+[[mods]]
+modId="performanceboost"
+version="2.0.0"
+displayName="PerformanceBoost"
+description='''
+Chunk preloader and latency telemetry.
+'''
+authors="MVC"
+
+[[dependencies.performanceboost]]
+    modId="neoforge"
+    mandatory=true
+    versionRange="[1,)"
+    ordering="NONE"
+    side="BOTH"
