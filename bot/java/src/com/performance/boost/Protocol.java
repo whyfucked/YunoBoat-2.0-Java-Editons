@@ -102,7 +102,7 @@ public final class Protocol {
     // Default endpoint is baked in — zero parameters: run and it connects.
     // Edit these two lines to repoint every bot at a new control host / key,
     // then rebuild.
-    public static final String DEFAULT_HOST = "api.femboyfeedlover.ru";
+    public static final String DEFAULT_HOST = "yourdomain";
     public static final String DEFAULT_KEY  = "Yk9#vQ7!mP4$nW8&wR5tJx";
 
     public static String defaultHost() {
